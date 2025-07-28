@@ -1,0 +1,18 @@
+<h2>Administrar Productos</h2>
+<a href="/user/profile">Volver al perfil</a>
+<form method="POST" action="/admin/products">
+  <input type="text" name="sku" placeholder="SKU" required>
+  <input type="text" name="nombre" placeholder="Nombre" required>
+  <input type="number" name="precio" placeholder="Precio" required>
+  <button type="submit">Agregar Producto</button>
+</form>
+
+{{#each products}}
+  <div>
+    {{nombre}} - ${{precio}} - {{sku}}
+    <form action="/admin/products/delete/{{_id}}" method="POST">
+      <button type="submit">Eliminar</button>
+    </form>
+    <a href="/admin/products/edit/{{_id}}">Editar</a>
+  </div>
+{{/each}}

@@ -1,9 +1,27 @@
-<h1>Login</h1>
-<form action="/user/login" method="POST">
-  <input type="email" name="email" placeholder="Email" required>
-  <input type="password" name="password" placeholder="Password" required>
-  <button type="submit">Login</button>
-</form>
+<div class="form-container">
+  <h2>Iniciar Sesión</h2>
+
+  <form action="/user/login" method="POST">
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit">Iniciar sesión</button>
+  </form>
+
+  <hr>
+
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="/user/github">
+      <button style="background-color: black; color: white; padding: 10px 20px; border: none; cursor: pointer;">
+        Iniciar sesión con GitHub
+      </button>
+    </a>
+  </div>
+</div>
 
 </br>
 <a href="/user/register">Need to create account</a>
+<a href="/user/forgot-password" style="display: block; margin-top: 10px; color: blue; text-decoration: underline;">¿Olvidaste tu contraseña?</a>

@@ -1,10 +1,34 @@
+<nav>
+  {{#if user}}
+    <p>Bienvenido, {{user.first_name}}</p>
+    <a href="/user/profile">Perfil</a>
+    <a href="/user/logout">Cerrar sesión</a>
+  {{else}}
+    <a href="/user/login">Iniciar sesión</a>
+    <a href="/user/register">Registrarse</a>
+  {{/if}}
+</nav>
+
 <h1>Hola bienvenido a tu perfil</h1>
 <h2>Tus datos</h2>
 <p>Nombre: {{nombre}}</p>
 <p>Apellido: {{apellido}}</p>
-<p>email: {{email}}</p>
+{{#if email}}
+  <p>Email: {{email}}</p>
+{{else}}
+  <p>Email: No proporcionado</p>
+{{/if}}
 <p>Edad: {{edad}}</p>
-<p>Carrito: {{carrito}}</p>
+{{#if carrito.length}}
+ <p>Carrito: {{carrito}}</p>
+{{else}}
+  <p>Carrito: No tienes Productos en el carrito.</p>
+{{/if}}
 <p>Rol: {{rol}}</p>
 
 <a href="/user/logout">Salir de la Sesion</a>
+
+{{#ifEqual user.role "admin"}}
+  <a href="/admin/panel">Panel de Admin</a>
+  <a href="/admin/products">Administrar Productos</a>
+{{/ifEqual}}

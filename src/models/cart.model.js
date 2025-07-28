@@ -3,8 +3,19 @@ import mongoose from 'mongoose';
 const cartSchema = new mongoose.Schema({
   products: [
     {
-      productId: String,
-      quantity: Number
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product', // Debe coincidir con el nombre del modelo
+        required: true
+      },
+      price: {
+        type: Number,
+        required: true
+      },
+      quantity: {
+        type: Number,
+        default: 1
+      }
     }
   ]
 });

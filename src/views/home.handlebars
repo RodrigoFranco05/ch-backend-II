@@ -1,2 +1,10 @@
-<h1>Hola {{nombre}}!</h1>
-<p>Esta es tu primera vista con Handlebars.</p>
+<nav>
+  {{#if user}}
+    <p>Bienvenido, {{user.first_name}}</p>
+    <a href="/user/profile">Perfil</a>
+    <a href="/user/logout">Cerrar sesión</a>
+  {{else}}
+    <a href="/user/login">Iniciar sesión</a>
+    <a href="/user/register">Registrarse</a>
+  {{/if}}
+</nav>
