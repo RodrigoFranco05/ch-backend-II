@@ -6,6 +6,6 @@ export default class UserDTO {
     this.email = userRaw.email;
     this.age = userRaw.age || "No se registro edad";
     this.role = userRaw.role;
-    this.orders = userRaw.cart;
+    this.orders = userRaw.cart || userRaw.orders;
   }
 }

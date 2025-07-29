@@ -24,7 +24,7 @@ export const handleUserCreate = async (req, res) => {
       password: createHash(password),
       age,
       role,
-      cart: null // O podrías generar un carrito vacío si querés
+      cart: null
     });
 
     res.redirect('/admin/panel');
@@ -34,6 +34,7 @@ export const handleUserCreate = async (req, res) => {
 };
 
 export const handleUserDelete = async (req, res) => {
+  console.log("Deleting user with ID:", req.params.id);
   await userModel.findByIdAndDelete(req.params.id);
   res.redirect('/admin/panel');
 };

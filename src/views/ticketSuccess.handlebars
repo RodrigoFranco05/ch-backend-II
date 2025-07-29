@@ -1,11 +1,38 @@
-<h2>¡Compra realizada con éxito!</h2>
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li class="logo">Mi Tienda</li>
+        <div class="nav-links">
+            <li><a href="/current">Home</a></li>
+            {{#if user}}
+                <li><a href="/user/profile">Perfil</a></li>
+                <li><a href="/user/logout">Cerrar Sesión</a></li>
+            {{else}}
+                <li><a href="/user/login">Iniciar Sesión</a></li>
+            {{/if}}
+            <li><a href="/user/cart" class="btn-primary">🛒 Carrito</a></li>
+        </div>
+    </ul>
+</nav>
 
-<p>Gracias por tu compra. Aquí están los detalles del ticket:</p>
-
-<ul>
-  <li><strong>ID del ticket:</strong> {{ticketId}}</li>
-  <li><strong>Total:</strong> ${{total}}</li>
-  <li><strong>Fecha:</strong> {{date}}</li>
-</ul>
-
-<a href="/current">Volver a la tienda</a>
+<!-- Main Content -->
+<div class="checkout-success-container">
+    <div class="checkout-success-panel">
+        <h1 class="checkout-success-title">
+            🎉 ¡Compra realizada con éxito!
+        </h1>
+        <p class="checkout-success-message">Gracias por tu compra. Aquí están los detalles de tu ticket:</p>
+        
+        <div class="ticket-details">
+            <ul>
+                <li><strong>ID del ticket:</strong> {{ticketId}}</li>
+                <li><strong>Total:</strong> ${{total}}</li>
+                <li><strong>Fecha:</strong> {{date}}</li>
+            </ul>
+        </div>
+        
+        <a href="/current" class="btn-back-to-shop">
+            🛍️ Volver a la tienda
+        </a>
+    </div>
+</div>

@@ -11,6 +11,7 @@ import { sendTicketEmail } from '../utils/mailer.js'; // Asegúrate de tener est
 
 export const renderProductList = async (req, res) => {
   const products = await getAllProductsService();
+  console.log("Products in renderProductList:",req.user);
   res.render('currentProducts', { products });
 };
 
@@ -55,7 +56,7 @@ export const addToCart = async (req, res) => {
 
   const product = await getProductByIdService(productId);
 
-  const cart = await cartModel.findById(user.orders); // ✅ correcto según tu JWT
+  const cart = await cartModel.findById(user.orders);
   
   if (!cart) {
     return res.status(404).json({ message: 'Carrito no encontrado' });
@@ -64,8 +65,8 @@ export const addToCart = async (req, res) => {
 
   const existingProduct = cart.products.find(p => p.product.toString() === productId);
   if (existingProduct) { 
-    existingProduct.quantity += 1; // Incrementa la cantidad si ya existe
-    existingProduct.price = product.precio; // Actualiza el precio en caso de que haya cambiado
+    existingProduct.quantity += 1;
+    existingProduct.price = product.precio; 
   }else{
   cart.products.push({
     product: new mongoose.Types.ObjectId(productId),

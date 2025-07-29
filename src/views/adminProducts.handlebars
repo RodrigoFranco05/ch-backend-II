@@ -1,18 +1,71 @@
-<h2>Administrar Productos</h2>
-<a href="/user/profile">Volver al perfil</a>
-<form method="POST" action="/admin/products">
-  <input type="text" name="sku" placeholder="SKU" required>
-  <input type="text" name="nombre" placeholder="Nombre" required>
-  <input type="number" name="precio" placeholder="Precio" required>
-  <button type="submit">Agregar Producto</button>
-</form>
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li class="logo">Mi Tienda</li>
+        <div class="nav-links">
+            <li><a href="/current">Home</a></li>
+            {{#if user}}
+                <li><a href="/user/profile">Perfil</a></li>
+                <li><a href="/user/logout">Cerrar Sesión</a></li>
+            {{else}}
+                <li><a href="/user/login">Iniciar Sesión</a></li>
+            {{/if}}
+            <li><a href="/user/cart" class="btn-primary">🛒 Carrito</a></li>
+        </div>
+    </ul>
+</nav>
 
-{{#each products}}
-  <div>
-    {{nombre}} - ${{precio}} - {{sku}}
-    <form action="/admin/products/delete/{{_id}}" method="POST">
-      <button type="submit">Eliminar</button>
-    </form>
-    <a href="/admin/products/edit/{{_id}}">Editar</a>
-  </div>
-{{/each}}
+<!-- Main Content -->
+<div class="container">
+    <div class="products-panel">
+        <div class="products-header">
+            <h1 class="products-title">📦 Administrar Productos</h1>
+            <a href="/user/profile" class="back-link">← Volver al perfil</a>
+        </div>
+
+        <!-- Add Product Form -->
+        <div class="add-product-form">
+            <h3 class="form-title">➕ Agregar Nuevo Producto</h3>
+            <form method="POST" action="/admin/products">
+                <div class="product-form-grid">
+                    <input type="text" name="sku" placeholder="SKU (Código)" required class="product-input">
+                    <input type="text" name="nombre" placeholder="Nombre del Producto" required class="product-input">
+                    <input type="number" name="precio" placeholder="Precio ($)" step="0.01" required class="product-input">
+                </div>
+                <button type="submit" class="btn-add-product">
+                    ✨ Agregar Producto
+                </button>
+            </form>
+        </div>
+
+        <!-- Products List -->
+        {{#if products.length}}
+            <div class="products-grid">
+                {{#each products}}
+                <div class="product-card">
+                    <div class="product-info">
+                        <div class="product-name">{{nombre}}</div>
+                        <div class="product-price">${{precio}}</div>
+                        <div class="product-sku">SKU: {{sku}}</div>
+                    </div>
+                    <div class="product-actions">
+                        <a href="/admin/products/edit/{{_id}}" class="btn-edit">
+                            ✏️ Editar
+                        </a>
+                        <form action="/admin/products/delete/{{_id}}" method="POST" style="display: inline;">
+                            <button type="submit" class="btn-delete-product" onclick="return confirm('¿Estás seguro de eliminar este producto?')">
+                                🗑️ Eliminar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        {{else}}
+            <div class="empty-products">
+                <div class="empty-products-icon">📦</div>
+                <p>No hay productos registrados aún</p>
+            </div>
+        {{/if}}
+    </div>
+</div>

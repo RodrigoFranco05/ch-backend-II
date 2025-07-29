@@ -1,10 +1,43 @@
+<!-- Navigation -->
 <nav>
-  {{#if user}}
-    <p>Bienvenido, {{user.first_name}}</p>
-    <a href="/user/profile">Perfil</a>
-    <a href="/user/logout">Cerrar sesión</a>
-  {{else}}
-    <a href="/user/login">Iniciar sesión</a>
-    <a href="/user/register">Registrarse</a>
-  {{/if}}
+    <ul>
+        <li class="logo">Mi Tienda</li>
+        <div class="nav-links">
+            <li><a href="/current">Home</a></li>
+            {{#if user}}
+                <li><a href="/user/profile">Perfil</a></li>
+                <li><a href="/user/logout">Cerrar Sesión</a></li>
+            {{else}}
+                <li><a href="/user/login">Iniciar Sesión</a></li>
+            {{/if}}
+            <li><a href="/user/cart" class="btn-primary">🛒 Carrito</a></li>
+        </div>
+    </ul>
 </nav>
+
+<!-- Main Content -->
+<div class="welcome-container">
+    {{#if user}}
+        <h1 class="welcome-message">¡Bienvenido, {{user.first_name}}!</h1>
+        <p class="message-text">Estamos encantados de verte de nuevo.</p>
+        <div class="welcome-actions">
+            <a href="/user/profile" class="btn-link">
+                👤 Ir a mi Perfil
+            </a>
+            <a href="/current" class="btn-link-outline">
+                🛍️ Volver a la Tienda
+            </a>
+        </div>
+    {{else}}
+        <h1 class="welcome-message">¡Bienvenido a Mi Tienda!</h1>
+        <p class="message-text">Explora nuestros productos o inicia sesión para una experiencia completa.</p>
+        <div class="welcome-actions">
+            <a href="/user/login" class="btn-link">
+                ➡️ Iniciar Sesión
+            </a>
+            <a href="/user/register" class="btn-link-outline">
+                📝 Registrarse
+            </a>
+        </div>
+    {{/if}}
+</div>

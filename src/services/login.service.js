@@ -5,6 +5,7 @@ import UserDTO from '../dtos/user.dto.js';
 import jwt from 'jsonwebtoken';
 import { config } from '../../config/config.js';
 import { sendResetPasswordEmail } from '../utils/mailer.js';
+import cartDao from '../repositories/daos/cart.dao.js';
 
 
 export const registerUserService = async ({ first_name, last_name, email, password, age }) => {
@@ -87,4 +88,15 @@ export const resetPasswordService = async (token, newPassword) => {
 
   const newHash = createHash(newPassword);
   await UserRepository.update(user._id, { password: newHash });
+};
+
+export const getUserCartService = async (cartId) => {
+  const cart = await cartDao.getCartByIdWithPopulate(cartId);
+  return cart;
+};
+
+export const emptyCartService = async (cartId) => {
+  const cart = await cartDao.getCartById(cartId);
+  cart.products = [];
+  await cart.save();
 };

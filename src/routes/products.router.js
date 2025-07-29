@@ -9,11 +9,11 @@ import {
   addToCart,
   checkout
 } from '../controllers/product.controler.js';
-import { authToken, authorizeRoles } from '../utils/utils.js';
+import { authToken, authorizeRoles, authTokenCurrent } from '../utils/utils.js';
 
 const router = Router();
 
-router.get('/current', authToken, renderProductList);
+router.get('/current',authTokenCurrent, renderProductList);
 router.post('/add-to-cart/:id', authToken, authorizeRoles('user'), addToCart);
 router.post('/checkout', authToken, authorizeRoles('user'), checkout);
 

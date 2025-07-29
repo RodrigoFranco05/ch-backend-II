@@ -1,1 +1,21 @@
-<h2>{{message}}</h2>
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li class="logo">Mi Tienda</li>
+        <div class="nav-links">
+            <li><a href="/current">Home</a></li>
+            {{#if user}}
+                <li><a href="/user/profile">Perfil</a></li>
+                <li><a href="/user/logout">Cerrar Sesión</a></li>
+            {{else}}
+                <li><a href="/user/login">Iniciar Sesión</a></li>
+            {{/if}}
+            <li><a href="/user/cart" class="btn-primary">🛒 Carrito</a></li>
+        </div>
+    </ul>
+</nav>
+
+<!-- Main Content -->
+<div class="message-page-container">
+    <h2 class="message-text">{{message}}</h2>
+</div>

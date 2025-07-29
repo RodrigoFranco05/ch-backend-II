@@ -1,0 +1,59 @@
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li class="logo">Mi Tienda</li>
+        <div class="nav-links">
+            <li><a href="/current">Home</a></li>
+            {{#if user}}
+                <li><a href="/user/profile">Perfil</a></li>
+                <li><a href="/user/logout">Cerrar Sesión</a></li>
+            {{else}}
+                <li><a href="/user/login">Iniciar Sesión</a></li>
+            {{/if}}
+            <li><a href="/user/cart" class="btn-primary">🛒 Carrito</a></li>
+        </div>
+    </ul>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+    <h1 class="page-title">🛒 Carrito de Compras</h1>
+
+    {{#if products.length}}
+        <div class="cart-items">
+            {{#each products}}
+            <div class="cart-item">
+                <div class="item-info">
+                    <div class="item-name">{{nombre}}</div>
+                    <div class="item-price">${{precio}}</div>
+                </div>
+                <div class="item-quantity">
+                    Cantidad: {{quantity}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        <div class="cart-actions">
+            <form method="POST" action="/checkout" style="display: inline;">
+                <button type="submit" class="btn btn-success">
+                    ✅ Finalizar Compra
+                </button>
+            </form>
+            
+            <form method="POST" action="/user/cart/empty" style="display: inline;">
+                <button type="submit" class="btn btn-danger">
+                    🗑️ Vaciar Carrito
+                </button>
+            </form>
+        </div>
+    {{else}}
+        <div class="empty-cart">
+            <div class="empty-cart-icon">🛒</div>
+            <p>Tu carrito está vacío</p>
+            <a href="/current" class="btn btn-outline">
+                🛍️ Continuar Comprando
+            </a>
+        </div>
+    {{/if}}
+</div>

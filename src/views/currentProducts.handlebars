@@ -1,13 +1,60 @@
-<h2>Productos Disponibles</h2>
-{{#each products}}
-  <div>
-    <p>{{nombre}} - ${{precio}} - {{sku}} - {{_id}}</p>
-    <form method="POST" action="/add-to-cart/{{_id}}">
-      <button type="submit">Agregar al carrito</button>
-    </form>
-  </div>
-{{/each}}
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li class="logo">Mi Tienda</li>
+        <div class="nav-links">
+            <li><a href="/current">Home</a></li>
+            {{#if user}}
+                <li><a href="/user/profile">Perfil</a></li>
+                <li><a href="/user/logout">Cerrar Sesión</a></li>
+            {{else}}
+                <li><a href="/user/login">Iniciar Sesión</a></li>
+            {{/if}}
+            <li><a href="/user/cart" class="btn-primary">🛒 Carrito</a></li>
+        </div>
+    </ul>
+</nav>
 
-<form method="POST" action="/checkout">
-  <button type="submit">Finalizar compra</button>
-</form>
+<!-- Main Content -->
+<div class="shop-container">
+    <h1 class="shop-title">🛍️ Productos Disponibles</h1>
+    
+    {{#if products.length}}
+        <div class="products-counter">
+            <span class="counter-badge">
+                {{products.length}} productos disponible
+            </span>
+        </div>
+        
+        <div class="products-shop-grid">
+            {{#each products}}
+            <div class="product-shop-card">
+                <div class="product-shop-info">
+                    <div class="product-shop-name">{{nombre}}</div>
+                    <div class="product-shop-price">${{precio}}</div>
+                    <div class="product-shop-sku">SKU: {{sku}}</div>
+                    <div class="product-shop-id">ID: {{_id}}</div>
+                </div>
+                
+                <form method="POST" action="/add-to-cart/{{_id}}" class="add-to-cart-form">
+                    <button type="submit" class="btn-add-to-cart" onclick="this.classList.add('loading')">
+                        🛒 Agregar al Carrito
+                    </button>
+                </form>
+            </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="empty-products-shop">
+            <div class="empty-products-shop-icon">📦</div>
+            <p>No hay productos disponibles en este momento</p>
+            {{#if user.role}}
+                {{#ifEqual user.role "admin"}}
+                    <a href="/admin/products" class="btn btn-outline">
+                        ➕ Agregar Productos
+                    </a>
+                {{/ifEqual}}
+            {{/if}}
+        </div>
+    {{/if}}
+</div>

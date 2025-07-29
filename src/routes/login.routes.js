@@ -11,9 +11,11 @@ import {
   forgotPasswordController,
   renderResetPasswordFormController,
   resetPasswordController,
-  renderForgotPasswordView
+  renderForgotPasswordView,
+  showCartController,
+  emptyCartController
 } from '../controllers/login.controller.js';
-import { authToken, generateToken } from '../utils/utils.js';
+import { authToken, authorizeRoles } from '../utils/utils.js';
 
 
 const router = express.Router();
@@ -40,6 +42,9 @@ router.get('/reset-password/:token', renderResetPasswordFormController);
 router.post('/reset-password/:token', resetPasswordController);
 
 router.get('/forgot-password', renderForgotPasswordView);
+
+router.get('/cart', authToken, authorizeRoles('user'),showCartController);
+router.post('/cart/empty', authToken, authorizeRoles('user'),emptyCartController);
 
 
 export default router;

@@ -1,27 +1,67 @@
-<div class="form-container">
-  <h2>Iniciar Sesión</h2>
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li class="logo">Mi Tienda</li>
+        <div class="nav-links">
+            <li><a href="/current">Home</a></li>
+            {{#if user}}
+                <li><a href="/user/profile">Perfil</a></li>
+                <li><a href="/user/logout">Cerrar Sesión</a></li>
+            {{else}}
+                <li><a href="/user/login">Iniciar Sesión</a></li>
+            {{/if}}
+            <li><a href="/user/cart" class="btn-primary">🛒 Carrito</a></li>
+        </div>
+    </ul>
+</nav>
 
-  <form action="/user/login" method="POST">
-    <label for="email">Correo electrónico:</label>
-    <input type="email" id="email" name="email" required>
-
-    <label for="password">Contraseña:</label>
-    <input type="password" id="password" name="password" required>
-
-    <button type="submit">Iniciar sesión</button>
-  </form>
-
-  <hr>
-
-  <div style="text-align: center; margin-top: 20px;">
-    <a href="/user/github">
-      <button style="background-color: black; color: white; padding: 10px 20px; border: none; cursor: pointer;">
-        Iniciar sesión con GitHub
-      </button>
-    </a>
-  </div>
+<!-- Main Content -->
+<div class="login-container">
+    <div class="login-panel">
+        <h1 class="login-title">👋 Iniciar Sesión</h1>
+        <form action="/user/login" method="POST" class="login-form">
+            <div class="form-group">
+                <label for="email" class="form-label">Correo electrónico:</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    required 
+                    class="form-input"
+                    placeholder="tu.email@ejemplo.com"
+                >
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Contraseña:</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    required 
+                    class="form-input"
+                    placeholder="Ingresa tu contraseña"
+                >
+            </div>
+            <button type="submit" class="btn-login">
+                ➡️ Iniciar sesión
+            </button>
+        </form>
+        
+        <hr class="divider">
+        
+        <div class="social-login-section">
+            <a href="/user/github" class="github-login-btn">
+                <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.419 2.865 8.165 6.839 9.48.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.007.07 1.532 1.03 1.532 1.03.892 1.529 2.341 1.089 2.91.832.092-.647.35-1.089.636-1.338-2.22-.253-4.555-1.116-4.555-4.949 0-1.092.39-1.983 1.029-2.675-.103-.253-.446-1.268.098-2.647 0 0 .84-.268 2.75 1.025A9.008 9.008 0 0112 5.042c.85.004 1.705.115 2.504.337 1.909-1.293 2.747-1.025 2.747-1.025.546 1.379.202 2.394.099 2.647.64.692 1.028 1.583 1.028 2.675 0 3.842-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .266.18.576.687.479C21.133 20.16 24 16.416 24 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" />
+                </svg>
+                Iniciar sesión con GitHub
+            </a>
+        </div>
+    </div>
+    
+    <div class="auth-links">
+        <a href="/user/register" class="auth-link">¿No tienes cuenta? Crear tu cuenta</a>
+        <a href="/user/forgot-password" class="auth-link">¿Olvidaste tu contraseña?</a>
+        <a href="/current" class="auth-link">← Volver a Home</a>
+    </div>
 </div>
-
-</br>
-<a href="/user/register">Need to create account</a>
-<a href="/user/forgot-password" style="display: block; margin-top: 10px; color: blue; text-decoration: underline;">¿Olvidaste tu contraseña?</a>

@@ -1,24 +1,88 @@
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li class="logo">Mi Tienda</li>
+        <div class="nav-links">
+            <li><a href="/current">Home</a></li>
+            {{#if user}}
+                <li><a href="/user/profile">Perfil</a></li>
+                <li><a href="/user/logout">Cerrar Sesión</a></li>
+            {{else}}
+                <li><a href="/user/login">Iniciar Sesión</a></li>
+            {{/if}}
+            <li><a href="/user/cart" class="btn-primary">🛒 Carrito</a></li>
+        </div>
+    </ul>
+</nav>
 
-<div class="form-container">
-    <h2>Registrarse</h2>
-
-
-    <form method="POST" action="/user/register">
-      <label for="first_name">Nombre:</label>
-      <input type="text" id="first_name" name="first_name" required>
-
-      <label for="last_name">Apellido:</label>
-      <input type="text" id="last_name" name="last_name" required>
-
-      <label for="email">Correo electrónico:</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="age">Edad:</label>
-      <input type="number" id="age" name="age" required>
-
-      <label for="password">Contraseña:</label>
-      <input type="password" id="password" name="password" required>
-
-      <button type="submit">Crear cuenta</button>
-    </form>
+<!-- Main Content -->
+<div class="register-container">
+    <div class="register-panel">
+        <h1 class="register-title">📝 Registrarse</h1>
+        <form method="POST" action="/user/register" class="register-form">
+            <div class="form-group">
+                <label for="first_name" class="form-label">Nombre:</label>
+                <input 
+                    type="text" 
+                    id="first_name" 
+                    name="first_name" 
+                    required 
+                    class="form-input"
+                    placeholder="Tu nombre"
+                >
+            </div>
+            <div class="form-group">
+                <label for="last_name" class="form-label">Apellido:</label>
+                <input 
+                    type="text" 
+                    id="last_name" 
+                    name="last_name" 
+                    required 
+                    class="form-input"
+                    placeholder="Tu apellido"
+                >
+            </div>
+            <div class="form-group">
+                <label for="email" class="form-label">Correo electrónico:</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    required 
+                    class="form-input"
+                    placeholder="tu.email@ejemplo.com"
+                >
+            </div>
+            <div class="form-group">
+                <label for="age" class="form-label">Edad:</label>
+                <input 
+                    type="number" 
+                    id="age" 
+                    name="age" 
+                    required 
+                    class="form-input"
+                    min="0"
+                    placeholder="Tu edad"
+                >
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Contraseña:</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    required 
+                    class="form-input"
+                    placeholder="Crea una contraseña segura"
+                >
+            </div>
+            <button type="submit" class="btn-register">
+                🚀 Crear cuenta
+            </button>
+        </form>
+    </div>
+    <div class="auth-links">
+        <a href="/user/login" class="auth-link">¿Ya tienes cuenta? Iniciar sesión</a>
+        <a href="/current" class="auth-link">← Volver a Home</a>
+    </div>
 </div>

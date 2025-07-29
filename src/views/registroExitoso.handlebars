@@ -1,2 +1,28 @@
-<h1>Registro Exitoso</h1>
-<a href="/user/login">Ir al login</a>
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li class="logo">Mi Tienda</li>
+        <div class="nav-links">
+            <li><a href="/current">Home</a></li>
+            {{#if user}}
+                <li><a href="/user/profile">Perfil</a></li>
+                <li><a href="/user/logout">Cerrar Sesión</a></li>
+            {{else}}
+                <li><a href="/user/login">Iniciar Sesión</a></li>
+            {{/if}}
+            <li><a href="/user/cart" class="btn-primary">🛒 Carrito</a></li>
+        </div>
+    </ul>
+</nav>
+
+<!-- Main Content -->
+<div class="register-success-container">
+    <div class="register-success-icon">🎉</div>
+    <h1 class="register-success-message">¡Registro Exitoso!</h1>
+    <p class="message-text">Tu cuenta ha sido creada con éxito. Ahora puedes iniciar sesión.</p>
+    <div class="welcome-actions">
+        <a href="/user/login" class="btn-link">
+            ➡️ Ir al inicio de sesión
+        </a>
+    </div>
+</div>

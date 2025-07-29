@@ -1,2 +1,30 @@
-<h1>Salio correctamente de la sesion</h1>
-<a href="/user/login">Volver al login</a>
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li class="logo">Mi Tienda</li>
+        <div class="nav-links">
+            <li><a href="/current">Home</a></li>
+            {{#if user}}
+                <li><a href="/user/profile">Perfil</a></li>
+                <li><a href="/user/logout">Cerrar Sesión</a></li>
+            {{else}}
+                <li><a href="/user/login">Iniciar Sesión</a></li>
+            {{/if}}
+            <li><a href="/user/cart" class="btn-primary">🛒 Carrito</a></li>
+        </div>
+    </ul>
+</nav>
+
+<!-- Main Content -->
+<div class="logout-success-container">
+    <div class="logout-success-icon">👋</div>
+    <h1 class="logout-success-message">¡Has salido correctamente de la sesión!</h1>
+    <div class="logout-success-actions">
+        <a href="/user/login" class="btn-link">
+            ➡️ Volver al inicio de sesión
+        </a>
+        <a href="/current" class="btn-link-outline">
+            🏠 Volver a Home
+        </a>
+    </div>
+</div>

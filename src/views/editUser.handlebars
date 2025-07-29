@@ -1,13 +1,109 @@
-<h2>Editar Usuario</h2>
-<form method="POST" action="/admin/users/{{user._id}}">
-  <input name="first_name" value="{{user.first_name}}" required>
-  <input name="last_name" value="{{user.last_name}}" required>
-  <input name="email" type="email" value="{{user.email}}" required>
-  <input name="age" type="number" value="{{user.age}}" required>
-  <select name="role">
-    <option value="user" {{#if (eq user.role "user")}}selected{{/if}}>User</option>
-    <option value="admin" {{#if (eq user.role "admin")}}selected{{/if}}>Admin</option>
-  </select>
-  <button type="submit">Guardar Cambios</button>
-</form>
-<a href="/admin/panel">Cancelar</a>
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li class="logo">Mi Tienda</li>
+        <div class="nav-links">
+            <li><a href="/current">Home</a></li>
+            {{#if user}}
+                <li><a href="/user/profile">Perfil</a></li>
+                <li><a href="/user/logout">Cerrar Sesión</a></li>
+            {{else}}
+                <li><a href="/user/login">Iniciar Sesión</a></li>
+            {{/if}}
+            <li><a href="/user/cart" class="btn-primary">🛒 Carrito</a></li>
+        </div>
+    </ul>
+</nav>
+
+<!-- Main Content -->
+<div class="edit-user-container">
+    <div class="back-to-admin-link">
+        <a href="/admin/panel" class="btn-back-admin">
+            ← Volver al Panel de Administración
+        </a>
+    </div>
+
+    <div class="edit-user-panel">
+        <h1 class="edit-user-title">👤 Editar Usuario</h1>
+        
+        <form method="POST" action="/admin/users/{{user._id}}" class="edit-user-form">
+            <div class="form-group">
+                <label class="form-label" for="first_name">Nombre</label>
+                <input 
+                    name="first_name" 
+                    id="first_name"
+                    value="{{user.first_name}}" 
+                    required 
+                    class="edit-user-input"
+                    placeholder="Ingresa el nombre"
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="last_name">Apellido</label>
+                <input 
+                    name="last_name" 
+                    id="last_name"
+                    value="{{user.last_name}}" 
+                    required 
+                    class="edit-user-input"
+                    placeholder="Ingresa el apellido"
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input 
+                    name="email" 
+                    id="email"
+                    type="email" 
+                    value="{{user.email}}" 
+                    required 
+                    class="edit-user-input"
+                    placeholder="Ingresa el email"
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="age">Edad</label>
+                <input 
+                    name="age" 
+                    id="age"
+                    type="number" 
+                    value="{{user.age}}" 
+                    required 
+                    class="edit-user-input"
+                    min="0"
+                    placeholder="Ingresa la edad"
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="role">Rol</label>
+                <select name="role" id="role" class="edit-user-select">
+                    <option value="user" {{#if (eq user.role "user")}}selected{{/if}}>👤 Usuario</option>
+                    <option value="admin" {{#if (eq user.role "admin")}}selected{{/if}}>👨‍💼 Administrador</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-save-changes" onclick="this.classList.add('loading')">
+                💾 Guardar Cambios
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+// Add success animation on form submission
+document.querySelector('.edit-user-form').addEventListener('submit', function(e) {
+    const button = this.querySelector('.btn-save-changes');
+    button.classList.add('loading');
+    
+    // Simulate success (you can remove this and handle it server-side)
+    setTimeout(() => {
+        button.classList.remove('loading');
+        button.classList.add('success');
+        button.innerHTML = '✅ Guardado';
+    }, 1500);
+});
+</script>

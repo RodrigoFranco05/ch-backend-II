@@ -3,12 +3,13 @@ import userRoutes from './routes/user.routes.js'; //rutas
 import loginRoutes from './routes/login.routes.js'; //rutas de login
 import adminRoutes from './routes/admin.routes.js'; // admin routes para crud
 import productRouter from './routes/products.router.js'; // product routes para crud
-import session ,{MemoryStore} from 'express-session';  //para las cookies
+import session from 'express-session';  //para las cookies
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser'; // para encriptar minimamente las cookies
 import MongoStore from 'connect-mongo'; // para guardar las sesiones en la base de datos
-import dotenv from 'dotenv';
 import { engine } from 'express-handlebars';
+import Handlebars from 'handlebars';
+import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import passport from 'passport';
@@ -23,12 +24,20 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.engine('handlebars', engine({
-  helpers: {
-    ifEqual: function (a, b, options) {
-      return a === b ? options.fn(this) : options.inverse(this);
-    }
+handlebars: allowInsecurePrototypeAccess(Handlebars),
+helpers: {
+ifEqual: function (a, b, options) {
+return a === b ? options.fn(this) : options.inverse(this);
+},
+gt: function (a, b, options) {
+  if (typeof options === 'undefined') {
+    return a > b;
   }
+  return a > b ? options.fn(this) : options.inverse(this);
+}
+}
 }));
+
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -68,6 +77,7 @@ app.use((req, res, next) => {
   }
   next();
 });
+;
 
 // Connect to MongoDB
 mongoose.connect(config.MONGO_URI).then(() => {
