@@ -46,7 +46,7 @@ export const githubCallbackService = async (user) => {
   if (!user) throw new Error("No user provided from GitHub strategy");
 
   const userDTO = new UserDTO(user);
- console.log("UserDTO from GitHub:", userDTO);
+
   const token = generateToken({ ...userDTO });
   return token;
 };

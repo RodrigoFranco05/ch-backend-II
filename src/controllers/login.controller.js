@@ -12,7 +12,6 @@ export const handleLogin = async (req, res) => {
     res.cookie('token', user.token, { httpOnly: true, maxAge: 60 * 60 * 1000 });
     res.redirect('/current');
   } catch (error) {
-    console.error("Login error:", error);
     res.status(500).send("Login failed");
   }
 };
@@ -25,7 +24,6 @@ export const handleRegister = async (req, res) => {
   try {
     res.render('registroExitoso');
   } catch (error) {
-    console.error("Error creando usuario desde controller:", error);
     res.status(500).json({ message: 'Error en el registro', error });
   }
 };
@@ -92,7 +90,7 @@ export const renderResetPasswordFormController = async (req, res) => {
   try {
     const isValid = await verifyResetTokenService(token);
     if (!isValid) return res.status(400).send('Token inválido o expirado');
-    console.log("Token válido:", token);
+
     res.render('resetPassword', { token });
   } catch (err) {
     res.status(400).send('Token inválido o expirado');
@@ -126,7 +124,6 @@ export const showCartController = async (req, res) => {
 
     res.render('cart', { products: productosPlano });
   } catch (error) {
-    console.error("Error al mostrar el carrito:", error);
     res.status(500).send("Error al mostrar el carrito");
   }
 };
@@ -137,7 +134,6 @@ export const emptyCartController = async (req, res) => {
     await emptyCartService(user.orders);
     res.redirect('/user/cart');
   } catch (error) {
-    console.error("Error al vaciar carrito:", error);
     res.status(500).send("Error al vaciar carrito");
   }
 };

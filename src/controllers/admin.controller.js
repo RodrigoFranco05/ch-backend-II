@@ -6,8 +6,6 @@ import UserDTO from '../dtos/user.dto.js';
 export const renderAdminPanel = async (req, res) => {
   const rawUsers = await getAllUsersService();
   const users = rawUsers.map(user => new UserDTO(user));
-
-  console.log("Users in admin panel:", users[0].id);
   res.render('adminPanel', { users });
 };
 
@@ -34,7 +32,6 @@ export const handleUserCreate = async (req, res) => {
 };
 
 export const handleUserDelete = async (req, res) => {
-  console.log("Deleting user with ID:", req.params.id);
   await userModel.findByIdAndDelete(req.params.id);
   res.redirect('/admin/panel');
 };

@@ -27,8 +27,8 @@ export const authToken = (req, res, next) => {
     if (err) return res.status(403).json({ message: 'Invalid token' });
 
     req.user = decoded;
-    res.locals.user = decoded; //disponible para Handlebars
-    console.log("User in authToken:", req.user);
+    res.locals.user = decoded;
+    
     next();
   });
 };
@@ -42,8 +42,8 @@ export const authTokenCurrent = (req, res, next) => {
     if (err) return res.status(403).json({ message: 'Invalid token' });
 
     req.user = decoded;
-    res.locals.user = decoded; //disponible para Handlebars
-    console.log("User in authToken:", req.user);
+    res.locals.user = decoded;
+
     next();
   });
 };

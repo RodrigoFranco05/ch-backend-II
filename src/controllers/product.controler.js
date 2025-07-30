@@ -7,11 +7,10 @@ import {
 } from '../services/product.service.js';
 import mongoose from 'mongoose';
 import cartModel from '../models/cart.model.js';
-import { sendTicketEmail } from '../utils/mailer.js'; // Asegúrate de tener esta función en mailer.js
+import { sendTicketEmail } from '../utils/mailer.js';
 
 export const renderProductList = async (req, res) => {
   const products = await getAllProductsService();
-  console.log("Products in renderProductList:",req.user);
   res.render('currentProducts', { products });
 };
 
@@ -48,7 +47,6 @@ export const addToCart = async (req, res) => {
   }
 
   const user = req.user;
-  console.log("User in addToCart:", user);
   
   if (!user || user.role !== 'user') {
     return res.status(403).send('Solo usuarios pueden comprar');
@@ -61,8 +59,6 @@ export const addToCart = async (req, res) => {
   if (!cart) {
     return res.status(404).json({ message: 'Carrito no encontrado' });
   }
-  console.log("cart",cart);
-
   const existingProduct = cart.products.find(p => p.product.toString() === productId);
   if (existingProduct) { 
     existingProduct.quantity += 1;
